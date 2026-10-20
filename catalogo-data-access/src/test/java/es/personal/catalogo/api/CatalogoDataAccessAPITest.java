@@ -128,4 +128,20 @@ class CatalogoDataAccessAPITest {
 		assertEquals(Constantes.ERROR3INF, respuesta.getMensaje());
 	}
 	
+	@Test
+	void crearServicio () {
+		when(buscarServiciosProcess.existePorCodigo("SER002")).thenReturn(false);
+	    when(buscarServiciosProcess.guardarServicio(any()))
+        .thenAnswer(invocacion -> invocacion.getArgument(0));
+		ServicioDTO servicio2 = new ServicioDTO("SER002", "Consulta", "SALUD");
+		RespuestaCatalogoDTO respuesta = catalogoDataAccessAPI.crearServicio(servicio2 );
+
+	    assertEquals(Constantes.CODOK, respuesta.getCodigo());
+	    assertEquals(1, respuesta.getServicios().size());
+	    assertEquals("SER002", respuesta.getServicios().get(0).getCodigo());
+
+	    verify(buscarServiciosProcess).existePorCodigo("SER002");
+	    verify(buscarServiciosProcess).guardarServicio(any());
+	}
+	
 }
