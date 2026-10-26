@@ -9,10 +9,12 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.personal.catalogo.entity.ServicioEntity;
 
 @SpringBootTest
+@Transactional
 class ServicioRepositoryTest {
 
     @Autowired
@@ -22,16 +24,16 @@ class ServicioRepositoryTest {
     void debeDevolverSoloLosServiciosActivosDeSalud() {
 
         List<ServicioEntity> resultado =
-                servicioRepository.findByCategoriaAndActivoTrue("SALUD");
+                servicioRepository.findByCategoriaNombreAndActivoTrue("SALUD");
 
-        assertEquals(2, resultado.size());
+        assertEquals(3, resultado.size());
 
         assertTrue(resultado.stream()
                 .allMatch(servicio -> servicio.isActivo()));
 
         assertTrue(resultado.stream()
                 .allMatch(servicio ->
-                        servicio.getCategoria().equals("SALUD")));
+                        servicio.getCategoria().getNombre().equals("SALUD")));
     }
     
 
@@ -48,12 +50,10 @@ class ServicioRepositoryTest {
     }
 
     @Test
-    void debeDevolverSoloUnServicioActivoDeCultura() {
-
+    void debeDevolverSoloUnServicioActivoDeDatos() {
         List<ServicioEntity> resultado =
-                servicioRepository.findByCategoriaAndActivoTrue("CULTURA");
-
+                servicioRepository.findByCategoriaNombreAndActivoTrue("Pruebas");
         assertEquals(1, resultado.size());
-        assertEquals("SER004", resultado.get(0).getCodigo());
+        assertEquals("SER006", resultado.get(0).getCodigo());
     }
 }

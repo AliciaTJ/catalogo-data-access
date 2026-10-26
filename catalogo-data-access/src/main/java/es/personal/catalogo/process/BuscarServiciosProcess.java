@@ -5,9 +5,13 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import es.personal.catalogo.dto.CategoriaDTO;
+import es.personal.catalogo.dto.RespuestaCatalogoDTO;
 import es.personal.catalogo.dto.ServicioDTO;
+import es.personal.catalogo.entity.CategoriaEntity;
 import es.personal.catalogo.entity.ServicioEntity;
 import es.personal.catalogo.finder.ServicioFinder;
+import es.personal.catalogo.utils.Constantes;
 
 @Service
 public class BuscarServiciosProcess {
@@ -22,6 +26,7 @@ public class BuscarServiciosProcess {
 		this.servicioFinder=servicioFinder;
 	}
 	
+
 	/**
 	 * Buscar servicio activo por categoria
 	 * @param categoria
@@ -71,11 +76,11 @@ public class BuscarServiciosProcess {
 	 * @param servicio
 	 * @return
 	 */
-	public ServicioEntity guardarServicio(ServicioEntity servicio) {
+	public Optional <ServicioDTO>  guardarServicio(ServicioDTO servicio) {
 	    return servicioFinder.guardarServicio(servicio);
 	}
 	
-	public Optional<ServicioDTO> actualizarServicio(
+	public String actualizarServicio(
 	        String codigo, ServicioDTO datosActualizados) {
 
 	    return servicioFinder.actualizarServicio(
@@ -93,4 +98,40 @@ public class BuscarServiciosProcess {
 	public boolean eliminarServicio (String codigo) {
 		return servicioFinder.eliminarServicio(codigo);
 	}
+	
+	
+	/**
+	 * 
+	 * 
+	 * CATEGORIAS
+	 * 
+	 * 
+	 */
+	
+	
+	public List<CategoriaDTO> buscarTodasCategorias(){
+		return servicioFinder.buscarTodasCategorias();
+	}
+	
+	public Optional<CategoriaDTO> buscarCategoriaPorId(Long id){
+		return servicioFinder.buscarCategoriaPorId(id);
+	}
+	
+	public String eliminarCategoriaPorNombre (String nombre) {
+		return servicioFinder.eliminarCategoriaPorNombre(nombre);
+	
+	}
+	
+	public Optional<CategoriaDTO> buscarCategoriaPorNombre(String nombre){
+		return servicioFinder.buscarCategoriaPorNombre(nombre);
+	}
+	
+	public boolean crearCategoria (CategoriaDTO categoria) {
+		return servicioFinder.crearCategoria(categoria);
+	}
+	
+	public boolean modificarCategoria(CategoriaDTO categoria) {
+		return servicioFinder.modificarCategoria(categoria);
+	}
+	
 }

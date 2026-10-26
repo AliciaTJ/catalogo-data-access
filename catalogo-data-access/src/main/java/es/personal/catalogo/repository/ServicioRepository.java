@@ -7,9 +7,11 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+
 import es.personal.catalogo.entity.ServicioEntity;
 
 @Repository
+
 public interface ServicioRepository
         extends JpaRepository<ServicioEntity, Long> {
 
@@ -18,7 +20,7 @@ public interface ServicioRepository
 	 * @param categoria
 	 * @return List<ServiciosEntitiy)
 	 */
-    List<ServicioEntity> findByCategoriaAndActivoTrue(String categoria);
+    List<ServicioEntity> findByCategoriaNombreAndActivoTrue(String categoria);
     /**
      * Busqueda de servicios inactivos
      */
@@ -30,7 +32,7 @@ public interface ServicioRepository
      * @param activo
      * @return
      */
-    List<ServicioEntity> findByCategoriaAndActivo(
+    List<ServicioEntity> findByCategoriaNombreAndActivo(
             String categoria, boolean activo);
     
     /**
@@ -43,7 +45,7 @@ public interface ServicioRepository
      * @param categoria
      * @return List <ServiceEntity>
      */
-    List<ServicioEntity> findByCategoria (String categoria);
+    List<ServicioEntity> findByCategoriaNombre (String categoria);
     
     /**
      * Busqueda de servicios por codigo

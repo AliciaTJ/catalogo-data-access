@@ -3,9 +3,12 @@ package es.personal.catalogo.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,8 +25,9 @@ public class ServicioEntity {
     @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
 
-    @Column(name = "categoria", nullable = false, length = 50)
-    private String categoria;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoria_id", nullable = false)
+    private CategoriaEntity categoria;
 
     @Column(name = "activo", nullable = false)
     private boolean activo;
@@ -43,7 +47,7 @@ public class ServicioEntity {
         return nombre;
     }
 
-    public String getCategoria() {
+    public CategoriaEntity getCategoria() {
         return categoria;
     }
 
@@ -63,7 +67,7 @@ public class ServicioEntity {
         this.nombre = nombre;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(CategoriaEntity categoria) {
         this.categoria = categoria;
     }
 
