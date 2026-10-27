@@ -9,8 +9,6 @@ import es.personal.catalogo.dto.CategoriaDTO;
 import es.personal.catalogo.dto.RespuestaCatalogoDTO;
 import es.personal.catalogo.dto.RespuestaCategoriaDTO;
 import es.personal.catalogo.dto.ServicioDTO;
-import es.personal.catalogo.entity.CategoriaEntity;
-import es.personal.catalogo.entity.ServicioEntity;
 import es.personal.catalogo.process.BuscarServiciosProcess;
 import es.personal.catalogo.utils.Constantes;
 

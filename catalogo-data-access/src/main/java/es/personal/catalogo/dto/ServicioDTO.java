@@ -37,7 +37,5 @@ public class ServicioDTO {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
-	
-	
-	
+		
 }
